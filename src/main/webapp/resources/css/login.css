@@ -1,0 +1,18 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 15/11/2015, 07:47:36 PM
+    Author     : Hugo
+*/
+
+.login-container {
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: -3px 3px 3px gray;
+    margin-top: 70px;
+    padding-top: 5px;
+    width: 300px;
+}
