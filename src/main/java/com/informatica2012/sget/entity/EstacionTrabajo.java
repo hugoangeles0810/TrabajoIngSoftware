@@ -52,10 +52,10 @@ public class EstacionTrabajo implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estacionTrabajo", fetch = FetchType.LAZY)
     private List<Trabajador> trabajadorList;
     @JoinColumn(name = "encargadoid", referencedColumnName = "id")
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne
     private Trabajador trabajador;
     @JoinColumn(name = "lugarid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Lugar lugar;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "estacionTrabajo", fetch = FetchType.LAZY)
     private List<Agencia> agenciaList;

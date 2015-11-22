@@ -36,6 +36,7 @@
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Mantenimiento <span class="caret"></span></a>
                     <ul class="dropdown-menu">
                       <li><a href="${cp}/mantenimiento/lugar/index.html">Lugar</a></li>
+                      <li><a href="${cp}/mantenimiento/estaciontrabajo/index.html">Estacion de trabajo</a></li>
                     </ul>
                   </li>
                   <li class="dropdown">

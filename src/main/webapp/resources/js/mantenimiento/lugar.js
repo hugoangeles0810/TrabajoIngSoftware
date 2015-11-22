@@ -5,7 +5,6 @@ $(document).ready(function(){
         if (r){
             var id = $(this).attr("regId");
             $.post(path + "borrar.json", {id: id}, function(data) {
-                console.log(data);
                 if (data.success){
                     window.location.reload();
                 } else {
@@ -112,15 +111,6 @@ $(document).ready(function(){
         }
         
         return true;
-    }
-    
-    function showError(msg){
-        var errorMessage = $("#error-message");
-        errorMessage.html(msg);
-        errorMessage.fadeIn();
-        setTimeout(function(){
-            errorMessage.fadeOut();
-        }, 2000);
     }
     
 });

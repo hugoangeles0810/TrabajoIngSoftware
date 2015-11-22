@@ -4,4 +4,11 @@
  * and open the template in the editor.
  */
 
-
+function showError(msg){
+    var errorMessage = $("#error-message");
+    errorMessage.html(msg);
+    errorMessage.fadeIn();
+    setTimeout(function(){
+        errorMessage.fadeOut();
+    }, 2000);
+}

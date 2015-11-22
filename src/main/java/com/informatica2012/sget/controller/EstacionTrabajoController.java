@@ -5,10 +5,9 @@
  */
 package com.informatica2012.sget.controller;
 
-import com.informatica2012.sget.dto.LugarDTO;
-import com.informatica2012.sget.entity.Lugar;
-import com.informatica2012.sget.service.LugarService;
-import com.informatica2012.sget.util.Paginacion;
+import com.informatica2012.sget.dto.EstacionTrabajoDTO;
+import com.informatica2012.sget.entity.EstacionTrabajo;
+import com.informatica2012.sget.service.EstacionTrabajoService;
 import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,13 +25,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Hugo
  */
 @Controller
-@RequestMapping("/mantenimiento/lugar")
-public class LugarController {
+@RequestMapping("/mantenimiento/estaciontrabajo")
+public class EstacionTrabajoController {
     
-    public static final String PREFIX = "mantenimiento/lugar/";
+    public static final String PREFIX = "mantenimiento/estaciontrabajo/";
     
     @Autowired
-    private LugarService lugarService;
+    private EstacionTrabajoService estacionTrabajoService;
     
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public ModelAndView index(
@@ -41,33 +40,32 @@ public class LugarController {
                     @RequestParam(value = "search", defaultValue = "") String search ) {
         
         ModelAndView mv = new ModelAndView(PREFIX + "index");
-        Paginacion paginacion = lugarService.getPaginationList(page, size, search);
-        mv.addObject("paginacion", paginacion);
+        mv.addObject("paginacion", estacionTrabajoService.getPaginationList(page, size, search));
         return mv;
     }
     
     @RequestMapping(value = "/obtener/{id}.json", method = RequestMethod.GET)
     @ResponseBody
-    public LugarDTO obtener(@PathVariable("id") Integer id) {
-        return new LugarDTO(lugarService.get(id));
+    public EstacionTrabajoDTO obtener(@PathVariable("id") Integer id) {
+        return new EstacionTrabajoDTO(estacionTrabajoService.get(id));
     }
     
     @RequestMapping(value = "/guardar.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> guardar(@RequestBody Lugar lugar){
-        
+    public Map<String, Object> guardar(@RequestBody EstacionTrabajo estacion){
+        System.out.println("estacion: " + estacion.getId());
         Map<String, Object> map = new HashMap();
         try {
-            if (lugar.getId() != null) {
-                lugarService.update(lugar);
+            if (estacion.getId() != null) {
+                estacionTrabajoService.update(estacion);
             } else {
-                lugarService.save(lugar);
+                estacionTrabajoService.save(estacion);
             }
             
             map.put("status", "success");
         } catch (Exception e) {
             map.put("status", "error");
-            map.put("msg", "Error al registrar el lugar");
+            map.put("msg", "Error al registrar la estación");
         }
         
         return map;
@@ -79,9 +77,9 @@ public class LugarController {
         Map<String, Object> map = new HashMap();
         
         try {
-            Lugar l = lugarService.get(id);
-            if (l != null) {
-                lugarService.delete(l);
+            EstacionTrabajo estacion = estacionTrabajoService.get(id);
+            if (estacion != null) {
+                estacionTrabajoService.delete(estacion);
             }
             map.put("success", true);
         } catch (Exception e) {
@@ -92,15 +90,4 @@ public class LugarController {
         return map;
     }
     
-    @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
-    public ModelAndView buscadorLugar(
-                    @RequestParam(value = "page", defaultValue = "1") Integer page,
-                    @RequestParam(value = "size", defaultValue = "10") Integer size,
-                    @RequestParam(value = "search", defaultValue = "") String search ) {
-        
-        ModelAndView mv = new ModelAndView(PREFIX + "tableLugares");
-        Paginacion paginacion = lugarService.getPaginationList(page, size, search);
-        mv.addObject("paginacion", paginacion);
-        return mv;
-    }
 }
