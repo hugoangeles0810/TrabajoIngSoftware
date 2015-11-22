@@ -259,3 +259,8 @@ footer {
 .pointer {
     cursor: pointer;
 }
+
+.pager li > .page-text
+{
+    border: none;
+}

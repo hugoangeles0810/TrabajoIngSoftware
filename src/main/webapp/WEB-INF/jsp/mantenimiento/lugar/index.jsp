@@ -11,7 +11,9 @@
     <hr />
     <div class="row">
         <div class="col-md-offset-1 col-md-3">
-            <form action="${cp}/mantenimiento/lugar/guardar.html" method="POST">
+            <p id="error-message" class="alert alert-danger" style="display: none;"></p>
+            <form id="form-lugar" method="POST">
+                <input id="id" type="hidden" name="id" />
                 <div class="form-group">
                     <label for="pais">Pais</label>
                     <input id="pais" type="text" name="pais" class="form-control" />
@@ -47,17 +49,49 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="lugar" items="${lugares}">
+                        <c:forEach var="lugar" items="${paginacion.items}">
                             <tr>
                                 <td>${lugar.pais}</td>
                                 <td>${lugar.estado}</td>
                                 <td>${lugar.ciudad}</td>
                                 <td>${lugar.distrito}</td>
-                                <td class="text-center pointer"><span regId="${lugar.id}" class="glyphicon glyphicon-remove deleted"></span></td>
+                                <td class="text-center pointer">
+                                    <span regId="${lugar.id}" class="glyphicon glyphicon-edit edited"></span>
+                                    <span regId="${lugar.id}" class="glyphicon glyphicon-remove deleted"></span>
+                                </td>
                             </tr>
                         </c:forEach> 
                     </tbody>
                 </table>
+                <div class="text-center">
+                    <nav>
+                        <ul class="pager">
+                            <li>
+                                <a id="inicio" href="javascript:void(0);">
+                                    <span class="glyphicon glyphicon-fast-backward"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="anterior" href="javascript:void(0);">
+                                    <span class="glyphicon glyphicon-backward"></span>
+                                </a>
+                            </li>
+                            <li>
+                                &nbsp; ${paginacion.page} / ${paginacion.totalPage} <span class="page-text">paginas &nbsp;</span>
+                            </li>
+                            <li>
+                                <a id="siguiente" href="javascript:void(0);">
+                                    <span class="glyphicon glyphicon-forward"></span>
+                                </a>
+                            </li>
+                            <li>
+                                <a id="fin" href="javascript:void(0);">
+                                    <span class="glyphicon glyphicon-fast-forward"></span>
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>
@@ -65,5 +99,11 @@
 <%@include file="/WEB-INF/jsp/include/footer.jsp" %>
 <script>
     var path = '${cp}/mantenimiento/lugar/';
+    var paginacion = {
+        page: ${paginacion.page},
+        size: ${paginacion.size},
+        search: '${paginacion.search}',
+        totalPage: ${paginacion.totalPage}
+    }
 </script>
 <script src="${cp}/resources/js/mantenimiento/lugar.js"></script>

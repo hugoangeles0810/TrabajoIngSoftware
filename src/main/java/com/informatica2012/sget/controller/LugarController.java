@@ -5,12 +5,17 @@
  */
 package com.informatica2012.sget.controller;
 
+import com.informatica2012.sget.dto.LugarDTO;
 import com.informatica2012.sget.entity.Lugar;
 import com.informatica2012.sget.service.LugarService;
+import com.informatica2012.sget.util.Paginacion;
 import java.util.HashMap;
 import java.util.Map;
+import javax.websocket.server.PathParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -31,27 +36,42 @@ public class LugarController {
     private LugarService lugarService;
     
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
-    public ModelAndView index() {
+    public ModelAndView index(
+                    @RequestParam(value = "page", defaultValue = "1") Integer page,
+                    @RequestParam(value = "size", defaultValue = "10") Integer size,
+                    @RequestParam(value = "search", defaultValue = "") String search ) {
+        
         ModelAndView mv = new ModelAndView("mantenimiento/lugar/index");
-        mv.addObject("lugares", lugarService.getAll());
+        Paginacion paginacion = lugarService.getPaginationList(page, size, search);
+        mv.addObject("paginacion", paginacion);
         return mv;
     }
     
-    @RequestMapping(value = "/guardar.html", method = RequestMethod.POST)
-    public String guardar(@RequestParam("pais") String pais,
-                          @RequestParam("estado") String estado,
-                          @RequestParam("ciudad") String ciudad,
-                          @RequestParam("distrito") String distrito){
+    @RequestMapping(value = "/obtener/{id}.json", method = RequestMethod.GET)
+    @ResponseBody
+    public LugarDTO obtener(@PathVariable("id") Integer id) {
+        return new LugarDTO(lugarService.get(id));
+    }
+    
+    @RequestMapping(value = "/guardar.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> guardar(@RequestBody Lugar lugar){
         
-        Lugar lugar = new Lugar();
-        lugar.setPais(pais);
-        lugar.setEstado(estado);
-        lugar.setCiudad(ciudad);
-        lugar.setDistrito(distrito);
+        Map<String, Object> map = new HashMap();
+        try {
+            if (lugar.getId() != null) {
+                lugarService.update(lugar);
+            } else {
+                lugarService.save(lugar);
+            }
+            
+            map.put("status", "success");
+        } catch (Exception e) {
+            map.put("status", "error");
+            map.put("msg", "Error al registrar el lugar");
+        }
         
-        lugarService.save(lugar);
-        
-        return "redirect:" + PREFIX + "/index.html";
+        return map;
     }
     
     @RequestMapping(value = "/borrar.json", method = RequestMethod.POST)
