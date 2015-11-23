@@ -37,6 +37,7 @@
                     <ul class="dropdown-menu">
                       <li><a href="${cp}/mantenimiento/lugar/index.html">Lugar</a></li>
                       <li><a href="${cp}/mantenimiento/estaciontrabajo/index.html">Estacion de trabajo</a></li>
+                      <li><a href="${cp}/mantenimiento/cargo/index.html">Cargo</a></li>
                     </ul>
                   </li>
                   <li class="dropdown">
