@@ -31,6 +31,7 @@ import javax.validation.constraints.Size;
 @NamedQueries({
     @NamedQuery(name = "Rol.findAll", query = "SELECT r FROM Rol r")})
 public class Rol implements Serializable {
+
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -41,7 +42,7 @@ public class Rol implements Serializable {
     @NotNull
     @Size(min = 1, max = 2147483647)
     @Column(name = "nmbre")
-    private String nmbre;
+    private String nombre;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "rol", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
 
@@ -54,7 +55,7 @@ public class Rol implements Serializable {
 
     public Rol(Integer id, String nmbre) {
         this.id = id;
-        this.nmbre = nmbre;
+        this.nombre = nmbre;
     }
 
     public Integer getId() {
@@ -65,12 +66,12 @@ public class Rol implements Serializable {
         this.id = id;
     }
 
-    public String getNmbre() {
-        return nmbre;
+    public String getNombre() {
+        return nombre;
     }
 
-    public void setNmbre(String nmbre) {
-        this.nmbre = nmbre;
+    public void setNombre(String nmbre) {
+        this.nombre = nmbre;
     }
 
     public List<Usuario> getUsuarioList() {
@@ -105,5 +106,5 @@ public class Rol implements Serializable {
     public String toString() {
         return "com.informatica2012.sget.entity.Rol[ id=" + id + " ]";
     }
-    
+
 }
