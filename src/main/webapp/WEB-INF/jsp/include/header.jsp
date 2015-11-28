@@ -42,6 +42,7 @@
                                 <li><a href="${cp}/mantenimiento/trabajador/index.html">Trabajador</a></li>
                       		<li><a href="${cp}/mantenimiento/agencia/index.html">Agencia</a></li>
                                 <li><a href="${cp}/mantenimiento/rol/index.html">Rol</a></li>
+                                <li><a href="${cp}/mantenimiento/servicios/index.html">Servicios</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

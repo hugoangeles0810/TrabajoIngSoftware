@@ -29,7 +29,7 @@ function bRolSiguiente() {
 function bRolFin() {
     if (bRolPaginacion.page < bRolPaginacion.totalPage){
         var pathBuscador = pathRol + "buscador.html";
-        $("#dialog-content-Rol").load(pathBuscador + "?page=" + bRolaginacion.totalPage + "&size=" + bRolPaginacion.size + "&search" + bRolPaginacion.search);
+        $("#dialog-content-rol").load(pathBuscador + "?page=" + bRolaginacion.totalPage + "&size=" + bRolPaginacion.size + "&search" + bRolPaginacion.search);
     }
 }
 
