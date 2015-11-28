@@ -98,7 +98,7 @@ public class ServiciosController {
             @RequestParam(value = "size", defaultValue = "10") Integer size,
             @RequestParam(value = "search", defaultValue = "") String search) {
 
-        ModelAndView mv = new ModelAndView(PREFIX + "tableRoles");
+        ModelAndView mv = new ModelAndView(PREFIX + "tableServicios");
         Paginacion paginacion = serviciosService.getPaginationList(page, size, search);
         mv.addObject("paginacion", paginacion);
         return mv;
