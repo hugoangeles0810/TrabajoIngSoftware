@@ -49,13 +49,13 @@ public class Trabajador implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "trabajador", fetch = FetchType.LAZY)
     private List<Usuario> usuarioList;
     @JoinColumn(name = "personaid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Persona persona;
     @JoinColumn(name = "estacionid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private EstacionTrabajo estacionTrabajo;
     @JoinColumn(name = "cargoid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Cargo cargo;
     @OneToMany(mappedBy = "trabajador", fetch = FetchType.LAZY)
     private List<EstacionTrabajo> estacionTrabajoList;

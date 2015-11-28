@@ -13,6 +13,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>.:SGET:.</title>
         <link rel="stylesheet" href="${cp}/resources/css/bootstrap.min.css">
+        <link rel="stylesheet" href="${cp}/resources/css/bootstrap-datepicker3.min.css">
         <link rel="stylesheet" href="${cp}/resources/css/main.css">
     </head>
     <body>
@@ -38,6 +39,7 @@
                       <li><a href="${cp}/mantenimiento/lugar/index.html">Lugar</a></li>
                       <li><a href="${cp}/mantenimiento/estaciontrabajo/index.html">Estacion de trabajo</a></li>
                       <li><a href="${cp}/mantenimiento/cargo/index.html">Cargo</a></li>
+                      <li><a href="${cp}/mantenimiento/trabajador/index.html">Trabajador</a></li>
                     </ul>
                   </li>
                   <li class="dropdown">

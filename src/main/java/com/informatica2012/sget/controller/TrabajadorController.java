@@ -5,9 +5,11 @@
  */
 package com.informatica2012.sget.controller;
 
-import com.informatica2012.sget.dto.EstacionTrabajoDTO;
-import com.informatica2012.sget.entity.EstacionTrabajo;
-import com.informatica2012.sget.service.EstacionTrabajoService;
+import com.informatica2012.sget.dto.TrabajadorDTO;
+import com.informatica2012.sget.entity.Trabajador;
+import com.informatica2012.sget.exception.BusinessException;
+import com.informatica2012.sget.service.TrabajadorService;
+import com.informatica2012.sget.util.Helper;
 import com.informatica2012.sget.util.Paginacion;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,13 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Hugo
  */
 @Controller
-@RequestMapping("/mantenimiento/estaciontrabajo")
-public class EstacionTrabajoController {
+@RequestMapping("/mantenimiento/trabajador")
+public class TrabajadorController {
     
-    public static final String PREFIX = "mantenimiento/estaciontrabajo/";
+    public static final String PREFIX = "mantenimiento/trabajador/";
     
     @Autowired
-    private EstacionTrabajoService estacionTrabajoService;
+    private TrabajadorService trabajadorService;
     
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public ModelAndView index(
@@ -41,35 +43,37 @@ public class EstacionTrabajoController {
                     @RequestParam(value = "search", defaultValue = "") String search ) {
         
         ModelAndView mv = new ModelAndView(PREFIX + "index");
-        mv.addObject("paginacion", estacionTrabajoService.getPaginationList(page, size, search));
+        Paginacion paginacion = trabajadorService.getPaginationList(page, size, search);
+        mv.addObject("paginacion", paginacion);
         return mv;
     }
     
     @RequestMapping(value = "/obtener/{id}.json", method = RequestMethod.GET)
     @ResponseBody
-    public EstacionTrabajoDTO obtener(@PathVariable("id") Integer id) {
-        return new EstacionTrabajoDTO(estacionTrabajoService.get(id));
+    public TrabajadorDTO obtener(@PathVariable("id") Integer id) {
+        return new TrabajadorDTO(trabajadorService.get(id));
     }
     
     @RequestMapping(value = "/guardar.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> guardar(@RequestBody EstacionTrabajo estacion){
-        System.out.println("estacion: " + estacion.getId());
-        Map<String, Object> map = new HashMap();
+    public Map<String, Object> guardar(@RequestBody TrabajadorDTO trabajadorDTO){
         try {
-            if (estacion.getId() != null) {
-                estacionTrabajoService.update(estacion);
-            } else {
-                estacionTrabajoService.save(estacion);
-            }
-            
-            map.put("status", "success");
-        } catch (Exception e) {
-            map.put("status", "error");
-            map.put("msg", "Error al registrar la estación");
+           trabajadorService.guardarTrabajador(trabajadorDTO);
+           return Helper.responseMapSuccess("Trabajador registrado con éxito");
+        } catch (BusinessException e) {
+            return Helper.responseMapError(e.getMessage());
         }
-        
-        return map;
+    }
+    
+    @RequestMapping(value = "/actualizar.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> actualizar(@RequestBody TrabajadorDTO trabajadorDTO){
+        try {
+           trabajadorService.actualizarTrabajador(trabajadorDTO);
+           return Helper.responseMapSuccess("Trabajador actualizado con éxito");
+        } catch (BusinessException e) {
+            return Helper.responseMapError(e.getMessage());
+        }
     }
     
     @RequestMapping(value = "/borrar.json", method = RequestMethod.POST)
@@ -78,9 +82,9 @@ public class EstacionTrabajoController {
         Map<String, Object> map = new HashMap();
         
         try {
-            EstacionTrabajo estacion = estacionTrabajoService.get(id);
-            if (estacion != null) {
-                estacionTrabajoService.delete(estacion);
+            Trabajador trabajador = trabajadorService.get(id);
+            if (trabajador != null) {
+                trabajadorService.delete(trabajador);
             }
             map.put("success", true);
         } catch (Exception e) {
@@ -89,18 +93,6 @@ public class EstacionTrabajoController {
         }
         
         return map;
-    }
-    
-    @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
-    public ModelAndView buscadorLugar(
-                    @RequestParam(value = "page", defaultValue = "1") Integer page,
-                    @RequestParam(value = "size", defaultValue = "10") Integer size,
-                    @RequestParam(value = "search", defaultValue = "") String search ) {
-        
-        ModelAndView mv = new ModelAndView(PREFIX + "tableEstaciones");
-        Paginacion paginacion = estacionTrabajoService.getPaginationList(page, size, search);
-        mv.addObject("paginacion", paginacion);
-        return mv;
     }
     
 }

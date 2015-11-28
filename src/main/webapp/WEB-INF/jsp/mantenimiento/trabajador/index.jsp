@@ -1,34 +1,64 @@
 <%-- 
-    Document   : index.jsp
-    Created on : 22/11/2015, 12:20:30 AM
+    Document   : index
+    Created on : 27/11/2015, 09:23:49 PM
     Author     : Hugo
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@include file="/WEB-INF/jsp/include/header.jsp" %>
 <div class="container">
-    <h1>Estación de trabajo</h1>
+    <h1>Trabajador</h1>
     <hr />
     <div class="row">
         <div class="col-md-offset-1 col-md-3">
             <p id="error-message" class="alert alert-danger" style="display: none;"></p>
-            <form id="form-estacion">
+            <form id="form-trabajador">
                 <input id="id" type="hidden" name="id" />
+                <div class="form-group">
+                    <label for="dni">DNI</label>
+                    <input id="dni" type="text" name="dni" class="form-control" />
+                </div>
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input id="nombre" type="text" name="nombre" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="apellidos">Apellidos</label>
+                    <input id="apellidos" type="text" name="apellidos" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="fechaNacimiento">Fecha Nacimiento</label>
+                    <input id="fechaNacimiento" type="text" name="fechaNacimiento" class="form-control datepicker" />
                 </div>
                 <div class="form-group">
                     <label for="direccion">Dirección</label>
                     <input id="direccion" type="text" name="direccion" class="form-control" />
                 </div>
                 <div class="form-group">
-                    <label for="lugar">Lugar</label>
+                    <label for="telefono">Telefono</label>
+                    <input id="telefono" type="text" name="telefono" class="form-control" />
+                </div>
+                <div class="form-group">
+                    <label for="cargo">Cargo</label>
                     <div class="input-group">
-                        <input id="lugarId" type="hidden" name="lugar" />
-                        <input id="lugarNombre" type="text" class="form-control" placeholder="Lugar" disabled="true">
+                        <input id="cargoId" type="hidden" name="cargo" />
+                        <input id="cargoNombre" type="text" class="form-control" placeholder="Cargo" disabled="true">
                         <span class="input-group-btn">
-                            <a id="searchLugar" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>
+                            <a id="searchCargo" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>
+                        </span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="fechaIngreso">Fecha Ingreso</label>
+                    <input id="fechaIngreso" type="text" name="fechaIngreso" class="form-control datepicker" />
+                </div>
+                <div class="form-group">
+                    <label for="estacionTrabajo">Estación de trabajo</label>
+                    <div class="input-group">
+                        <input id="estacionId" type="hidden" name="estacion" />
+                        <input id="estacionNombre" type="text" class="form-control" placeholder="Estación de trabajo" disabled="true">
+                        <span class="input-group-btn">
+                            <a id="searchEstacion" class="btn btn-default"><span class="glyphicon glyphicon-search"></span></a>
                         </span>
                     </div>
                 </div>
@@ -43,22 +73,24 @@
                 <table class="table table-bordered table-hover">
                     <thead>
                         <tr class="info">
+                            <th>DNI</th>
+                            <th>Apellidos</th>
                             <th>Nombre</th>
-                            <th>Dirección</th>
                             <th></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <c:forEach var="estacion" items="${paginacion.items}">
+                        <c:forEach var="trabajador" items="${paginacion.items}">
                             <tr>
-                                <td>${estacion.nombre}</td>
-                                <td>${estacion.direccion}</td>
-                                <td class="text-center">
-                                    <span regId="${estacion.id}" class="glyphicon glyphicon-edit edited pointer"></span>
-                                    <span regId="${estacion.id}" class="glyphicon glyphicon-remove deleted pointer"></span>
+                                <td>${trabajador.persona.dni}</td>
+                                <td>${trabajador.persona.apellidos}</td>
+                                <td>${trabajador.persona.nombre}</td>
+                                <td class="text-center pointer">
+                                    <span regId="${trabajador.id}" class="glyphicon glyphicon-edit edited"></span>
+                                    <span regId="${trabajador.id}" class="glyphicon glyphicon-remove deleted"></span>
                                 </td>
                             </tr>
-                        </c:forEach>
+                        </c:forEach> 
                     </tbody>
                 </table>
                 <div class="text-center">
@@ -94,19 +126,20 @@
         </div>
     </div>
 </div>
-                            
-<%@include file="../../buscador/lugar.jsp"  %>
-                            
+<%@include file="/WEB-INF/jsp/buscador/cargo.jsp" %>
+<%@include file="/WEB-INF/jsp/buscador/estacion.jsp" %>
 <%@include file="/WEB-INF/jsp/include/footer.jsp" %>
 <script>
-    var path = '${cp}/mantenimiento/estaciontrabajo/';
-    var pathLugar = '${cp}/mantenimiento/lugar/';
+    var path = '${cp}/mantenimiento/trabajador/';
+    var pathCargo = '${cp}/mantenimiento/cargo/';
+    var pathEstacion = '${cp}/mantenimiento/estaciontrabajo/';
     var paginacion = {
         page: ${paginacion.page},
         size: ${paginacion.size},
         search: '${paginacion.search}',
         totalPage: ${paginacion.totalPage}
-    }
+    };
 </script>
-<script src="${cp}/resources/js/mantenimiento/estaciontrabajo.js"></script>
-<script src="${cp}/resources/js/buscador/buscadorLugar.js"></script>
+<script src="${cp}/resources/js/mantenimiento/trabajador.js"></script>
+<script src="${cp}/resources/js/buscador/buscadorCargo.js"></script>
+<script src="${cp}/resources/js/buscador/buscadorEstacion.js"></script>
