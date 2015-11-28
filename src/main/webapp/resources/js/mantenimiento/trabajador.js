@@ -79,6 +79,52 @@ function bEstacionCallback(id, nombre) {
 }
 
 function isFormValid() {
+    
+    if (!isTextValid($("#dni").val())){
+        showError("Debe ingresar el DNI.");
+        return false;
+    }
+    
+    if (!isTextLengthValid($("#dni").val(), 8)) {
+        showError("El DNI debe tener 8 digitos.");
+        return false;
+    }
+    
+    if (!isTextValid($("#nombre").val())){
+        showError("Debe ingresar el nombre.");
+        return false;
+    }
+    
+    if (!isTextValid($("#apellidos").val())){
+        showError("Debe ingresar los apellidos.");
+        return false;
+    }
+    
+    if (!isTextValid($("#fechaNacimiento").val())){
+        showError("Debe ingresar la fecha de nacimiento.");
+        return false;
+    }
+    
+    if (!isTextValid($("#direccion").val())){
+        showError("Debe ingresar la dirección.");
+        return false;
+    }
+    
+    if (!isTextValid($("#cargoId").val())){
+        showError("Debe seleccionar el cargo.");
+        return false;
+    }
+    
+    if (!isTextValid($("#fechaIngreso").val())){
+        showError("Debe ingresar la fecha de ingreso.");
+        return false;
+    }
+    
+    if (!isTextValid($("#estacionId").val())){
+        showError("Debe seleccionar la estación de trabajo.");
+        return false;
+    }
+    
     return true;
 }
 

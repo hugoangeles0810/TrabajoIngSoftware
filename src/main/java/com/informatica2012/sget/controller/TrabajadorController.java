@@ -82,10 +82,7 @@ public class TrabajadorController {
         Map<String, Object> map = new HashMap();
         
         try {
-            Trabajador trabajador = trabajadorService.get(id);
-            if (trabajador != null) {
-                trabajadorService.delete(trabajador);
-            }
+            trabajadorService.eliminarTrabajador(id);
             map.put("success", true);
         } catch (Exception e) {
             e.printStackTrace();

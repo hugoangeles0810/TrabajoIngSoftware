@@ -19,5 +19,6 @@ public interface TrabajadorService extends BaseService<Trabajador, Integer>{
     public Paginacion getPaginationList(Integer page, Integer size, String search);
     public void guardarTrabajador(TrabajadorDTO trabajadorDTO) throws BusinessException;
     public void actualizarTrabajador(TrabajadorDTO trabajadorDTO) throws BusinessException;
+    public void eliminarTrabajador(Integer id);
     
 }

@@ -12,3 +12,11 @@ function showError(msg){
         errorMessage.fadeOut();
     }, 2000);
 }
+
+function isTextValid(text){
+    return text && text.trim() !== "";
+}
+
+function isTextLengthValid(text, length) {
+    return text && text.length === length;
+}

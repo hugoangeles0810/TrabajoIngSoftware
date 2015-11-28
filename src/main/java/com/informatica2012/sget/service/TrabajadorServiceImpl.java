@@ -66,6 +66,15 @@ public class TrabajadorServiceImpl extends BaseServiceImpl<Trabajador, Integer>
     }
     
     @Override
+    public void eliminarTrabajador(Integer id) {
+        Trabajador trabajador = trabajadorRepository.get(id);
+        Persona persona = trabajador.getPersona();
+        
+        trabajadorRepository.delete(trabajador);
+        personaService.delete(persona);
+    }
+    
+    @Override
     public Paginacion getPaginationList(Integer page, Integer size, String search) {
         Criterio criterio = Criterio.forClass(Trabajador.class);
         
