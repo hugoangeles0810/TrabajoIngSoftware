@@ -40,6 +40,7 @@
                       <li><a href="${cp}/mantenimiento/estaciontrabajo/index.html">Estacion de trabajo</a></li>
                       <li><a href="${cp}/mantenimiento/cargo/index.html">Cargo</a></li>
                       <li><a href="${cp}/mantenimiento/trabajador/index.html">Trabajador</a></li>
+                      <li><a href="${cp}/mantenimiento/agencia/index.html">Agencia</a></li>
                     </ul>
                   </li>
                   <li class="dropdown">

@@ -5,9 +5,10 @@
  */
 package com.informatica2012.sget.controller;
 
-import com.informatica2012.sget.dto.TrabajadorDTO;
+import com.informatica2012.sget.dto.AgenciaDTO;
+import com.informatica2012.sget.entity.Agencia;
 import com.informatica2012.sget.exception.BusinessException;
-import com.informatica2012.sget.service.TrabajadorService;
+import com.informatica2012.sget.service.AgenciaService;
 import com.informatica2012.sget.util.Helper;
 import com.informatica2012.sget.util.Paginacion;
 import java.util.HashMap;
@@ -27,13 +28,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Hugo
  */
 @Controller
-@RequestMapping("/mantenimiento/trabajador")
-public class TrabajadorController {
+@RequestMapping("/mantenimiento/agencia")
+public class AgenciaController {
     
-    public static final String PREFIX = "mantenimiento/trabajador/";
+    public static final String PREFIX = "mantenimiento/agencia/";
     
     @Autowired
-    private TrabajadorService trabajadorService;
+    private AgenciaService agenciaService;
     
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public ModelAndView index(
@@ -42,23 +43,23 @@ public class TrabajadorController {
                     @RequestParam(value = "search", defaultValue = "") String search ) {
         
         ModelAndView mv = new ModelAndView(PREFIX + "index");
-        Paginacion paginacion = trabajadorService.getPaginationList(page, size, search);
+        Paginacion paginacion = agenciaService.getPaginationList(page, size, search);
         mv.addObject("paginacion", paginacion);
         return mv;
     }
     
     @RequestMapping(value = "/obtener/{id}.json", method = RequestMethod.GET)
     @ResponseBody
-    public TrabajadorDTO obtener(@PathVariable("id") Integer id) {
-        return new TrabajadorDTO(trabajadorService.get(id));
+    public AgenciaDTO obtener(@PathVariable("id") Integer id) {
+        return new AgenciaDTO(agenciaService.get(id));
     }
     
     @RequestMapping(value = "/guardar.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> guardar(@RequestBody TrabajadorDTO trabajadorDTO){
+    public Map<String, Object> guardar(@RequestBody AgenciaDTO agencia){
         try {
-           trabajadorService.guardarTrabajador(trabajadorDTO);
-           return Helper.responseMapSuccess("Trabajador registrado con éxito");
+            agenciaService.guardarAgencia(agencia);
+            return Helper.responseMapSuccess("Agencia registrada con éxito.");
         } catch (BusinessException e) {
             return Helper.responseMapError(e.getMessage());
         }
@@ -66,10 +67,10 @@ public class TrabajadorController {
     
     @RequestMapping(value = "/actualizar.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> actualizar(@RequestBody TrabajadorDTO trabajadorDTO){
+    public Map<String, Object> actualizar(@RequestBody AgenciaDTO agencia){
         try {
-           trabajadorService.actualizarTrabajador(trabajadorDTO);
-           return Helper.responseMapSuccess("Trabajador actualizado con éxito");
+            agenciaService.actualizarAgencia(agencia);
+            return Helper.responseMapSuccess("Agencia actualizada con éxito.");
         } catch (BusinessException e) {
             return Helper.responseMapError(e.getMessage());
         }
@@ -81,7 +82,10 @@ public class TrabajadorController {
         Map<String, Object> map = new HashMap();
         
         try {
-            trabajadorService.eliminarTrabajador(id);
+            Agencia a = agenciaService.get(id);
+            if (a != null) {
+                agenciaService.delete(a);
+            }
             map.put("success", true);
         } catch (Exception e) {
             e.printStackTrace();

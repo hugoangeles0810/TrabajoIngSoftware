@@ -20,3 +20,7 @@ function isTextValid(text){
 function isTextLengthValid(text, length) {
     return text && text.length === length;
 }
+
+function isNumber(text) {
+    return text && !isNaN(text);
+}

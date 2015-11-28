@@ -49,7 +49,7 @@ public class Agencia implements Serializable {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencia", fetch = FetchType.LAZY)
     private List<Bus> busList;
     @JoinColumn(name = "estacionid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private EstacionTrabajo estacionTrabajo;
 
     public Agencia() {
