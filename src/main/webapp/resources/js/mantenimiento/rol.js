@@ -12,7 +12,6 @@ $(document).ready(function () {
             $.post(path + "borrar.json", {id: id}, function (data) {
                 if (data.success) {
                     window.location.reload();
-                    alert("hola");
                 } else {
                     alert("Error al borrar el lugar");
                 }
