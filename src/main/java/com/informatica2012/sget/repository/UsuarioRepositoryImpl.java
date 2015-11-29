@@ -5,15 +5,15 @@
  */
 package com.informatica2012.sget.repository;
 
-import com.informatica2012.sget.entity.Servicios;
+import com.informatica2012.sget.entity.Usuario;
 import org.springframework.stereotype.Repository;
 
 /**
  *
- * @author CARLOS
+ * @author Hugo
  */
 @Repository
-public class ServiciosRepositoryImpl extends BaseRepositoryImpl<Servicios, Integer>
-        implements ServiciosRepository {
-
+public class UsuarioRepositoryImpl extends BaseRepositoryImpl<Usuario, Integer>
+                implements UsuarioRepository{
+    
 }

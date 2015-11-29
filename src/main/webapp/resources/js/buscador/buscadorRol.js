@@ -1,9 +1,6 @@
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-function bROlInicio() {
+/* global bRolPaginacion, pathRol, bRolaginacion, bRolpaginacion, bRolCallback */
+
+function bRolInicio() {
     if (bRolPaginacion.page > 1){
         var pathBuscador = pathRol + "buscador.html";
         $("#dialog-content-rol").load(pathBuscador + "?page=1&size=" + bRolPaginacion.size + "&search" + bRolPaginacion.search);

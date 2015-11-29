@@ -47,10 +47,10 @@ public class Usuario implements Serializable {
     @Column(name = "clave")
     private String clave;
     @JoinColumn(name = "trabajadorid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Trabajador trabajador;
     @JoinColumn(name = "rolid", referencedColumnName = "id")
-    @ManyToOne(optional = false, fetch = FetchType.LAZY)
+    @ManyToOne(optional = false)
     private Rol rol;
 
     public Usuario() {

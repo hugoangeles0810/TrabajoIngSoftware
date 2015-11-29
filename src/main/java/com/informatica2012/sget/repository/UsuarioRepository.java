@@ -5,12 +5,12 @@
  */
 package com.informatica2012.sget.repository;
 
-import com.informatica2012.sget.entity.Servicios;
+import com.informatica2012.sget.entity.Usuario;
 
 /**
  *
- * @author CARLOS
+ * @author Hugo
  */
-public interface ServiciosRepository extends BaseRepository<Servicios, Integer> {
-
+public interface UsuarioRepository extends BaseRepository<Usuario, Integer>{
+    
 }

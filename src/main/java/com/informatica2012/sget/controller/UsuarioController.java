@@ -6,8 +6,10 @@
 package com.informatica2012.sget.controller;
 
 import com.informatica2012.sget.dto.TrabajadorDTO;
+import com.informatica2012.sget.dto.UsuarioDTO;
+import com.informatica2012.sget.entity.Usuario;
 import com.informatica2012.sget.exception.BusinessException;
-import com.informatica2012.sget.service.TrabajadorService;
+import com.informatica2012.sget.service.UsuarioService;
 import com.informatica2012.sget.util.Helper;
 import com.informatica2012.sget.util.Paginacion;
 import java.util.HashMap;
@@ -27,13 +29,13 @@ import org.springframework.web.servlet.ModelAndView;
  * @author Hugo
  */
 @Controller
-@RequestMapping("/mantenimiento/trabajador")
-public class TrabajadorController {
+@RequestMapping("/mantenimiento/usuario")
+public class UsuarioController {
     
-    public static final String PREFIX = "mantenimiento/trabajador/";
+    public static final String PREFIX = "mantenimiento/usuario/";
     
     @Autowired
-    private TrabajadorService trabajadorService;
+    private UsuarioService usuarioService;
     
     @RequestMapping(value = "/index.html", method = RequestMethod.GET)
     public ModelAndView index(
@@ -42,23 +44,23 @@ public class TrabajadorController {
                     @RequestParam(value = "search", defaultValue = "") String search ) {
         
         ModelAndView mv = new ModelAndView(PREFIX + "index");
-        Paginacion paginacion = trabajadorService.getPaginationList(page, size, search);
+        Paginacion paginacion = usuarioService.getPaginationList(page, size, search);
         mv.addObject("paginacion", paginacion);
         return mv;
     }
     
     @RequestMapping(value = "/obtener/{id}.json", method = RequestMethod.GET)
     @ResponseBody
-    public TrabajadorDTO obtener(@PathVariable("id") Integer id) {
-        return new TrabajadorDTO(trabajadorService.get(id));
+    public UsuarioDTO obtener(@PathVariable("id") Integer id) {
+        return new UsuarioDTO(usuarioService.get(id));
     }
     
     @RequestMapping(value = "/guardar.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> guardar(@RequestBody TrabajadorDTO trabajadorDTO){
+    public Map<String, Object> guardar(@RequestBody UsuarioDTO usuarioDTO){
         try {
-           trabajadorService.guardarTrabajador(trabajadorDTO);
-           return Helper.responseMapSuccess("Trabajador registrado con éxito");
+           usuarioService.guardarUsuario(usuarioDTO);
+           return Helper.responseMapSuccess("Usuario registrado con éxito");
         } catch (BusinessException e) {
             return Helper.responseMapError(e.getMessage());
         }
@@ -66,10 +68,10 @@ public class TrabajadorController {
     
     @RequestMapping(value = "/actualizar.json", method = RequestMethod.POST)
     @ResponseBody
-    public Map<String, Object> actualizar(@RequestBody TrabajadorDTO trabajadorDTO){
+    public Map<String, Object> actualizar(@RequestBody UsuarioDTO usuarioDTO){
         try {
-           trabajadorService.actualizarTrabajador(trabajadorDTO);
-           return Helper.responseMapSuccess("Trabajador actualizado con éxito");
+           usuarioService.actualizarUsuario(usuarioDTO);
+           return Helper.responseMapSuccess("Usuario actualizado con éxito");
         } catch (BusinessException e) {
             return Helper.responseMapError(e.getMessage());
         }
@@ -81,7 +83,10 @@ public class TrabajadorController {
         Map<String, Object> map = new HashMap();
         
         try {
-            trabajadorService.eliminarTrabajador(id);
+            Usuario u = usuarioService.get(id);
+            if (u != null) {
+                usuarioService.delete(u);
+            }
             map.put("success", true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -89,18 +94,6 @@ public class TrabajadorController {
         }
         
         return map;
-    }
-    
-    @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
-    public ModelAndView buscadorTrabajador(
-                    @RequestParam(value = "page", defaultValue = "1") Integer page,
-                    @RequestParam(value = "size", defaultValue = "10") Integer size,
-                    @RequestParam(value = "search", defaultValue = "") String search ) {
-        
-        ModelAndView mv = new ModelAndView(PREFIX + "tableTrabajador");
-        Paginacion paginacion = trabajadorService.getPaginationList(page, size, search);
-        mv.addObject("paginacion", paginacion);
-        return mv;
     }
     
 }

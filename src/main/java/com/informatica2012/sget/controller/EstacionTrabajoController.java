@@ -92,7 +92,7 @@ public class EstacionTrabajoController {
     }
     
     @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
-    public ModelAndView buscadorLugar(
+    public ModelAndView buscadorEstacion(
                     @RequestParam(value = "page", defaultValue = "1") Integer page,
                     @RequestParam(value = "size", defaultValue = "10") Integer size,
                     @RequestParam(value = "search", defaultValue = "") String search ) {

@@ -14,7 +14,7 @@
         </thead>
         <tbody>
             <c:forEach var="rol" items="${paginacion.items}">
-                <tr onclick="bRolSelected(${Rol.id}, '${rol.nombre}')" class="pointer">
+                <tr onclick="bRolSelected(${rol.id}, '${rol.nombre}')" class="pointer">
                     <td>${rol.nombre}</td>
                 </tr>
             </c:forEach> 
@@ -24,12 +24,12 @@
         <nav>
             <ul class="pager">
                 <li>
-                    <a id="bLugarInicio" onclick="bRolInicio();" href="javascript:void(0);">
+                    <a id="bRolInicio" onclick="bRolInicio();" href="javascript:void(0);">
                         <span class="glyphicon glyphicon-fast-backward"></span>
                     </a>
                 </li>
                 <li>
-                    <a id="bLugarAnterior" onclick="bRolAnterior();" href="javascript:void(0);">
+                    <a id="bRolAnterior" onclick="bRolAnterior();" href="javascript:void(0);">
                         <span class="glyphicon glyphicon-backward"></span>
                     </a>
                 </li>
@@ -37,12 +37,12 @@
                     &nbsp; ${paginacion.page} / ${paginacion.totalPage} <span class="page-text">paginas &nbsp;</span>
                 </li>
                 <li>
-                    <a id="bLugarSiguiente" onclick="bRolSiguiente();" href="javascript:void(0);">
+                    <a id="bRolSiguiente" onclick="bRolSiguiente();" href="javascript:void(0);">
                         <span class="glyphicon glyphicon-forward"></span>
                     </a>
                 </li>
                 <li>
-                    <a id="bLugarFin" onclick="bRolFin();" href="javascript:void(0);">
+                    <a id="bRolFin" onclick="bRolFin();" href="javascript:void(0);">
                         <span class="glyphicon glyphicon-fast-forward"></span>
                     </a>
                 </li>
