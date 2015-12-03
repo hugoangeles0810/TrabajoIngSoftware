@@ -101,4 +101,16 @@ public class ModeloBusController {
         
         return map;
     }
+    
+    @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
+    public ModelAndView buscadorLugar(
+                    @RequestParam(value = "page", defaultValue = "1") Integer page,
+                    @RequestParam(value = "size", defaultValue = "10") Integer size,
+                    @RequestParam(value = "search", defaultValue = "") String search ) {
+        
+        ModelAndView mv = new ModelAndView(PREFIX + "tableModelos");
+        Paginacion paginacion = modeloBusService.getPaginationList(page, size, search);
+        mv.addObject("paginacion", paginacion);
+        return mv;
+    }
 }
