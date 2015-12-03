@@ -44,6 +44,7 @@
                                 <li><a href="${cp}/mantenimiento/rol/index.html">Rol</a></li>
                                 <li><a href="${cp}/mantenimiento/servicios/index.html">Servicios</a></li>
                                 <li><a href="${cp}/mantenimiento/usuario/index.html">Usuario</a></li>
+                                <li><a href="${cp}/mantenimiento/modelobus/index.html">Modelo de Bus</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">

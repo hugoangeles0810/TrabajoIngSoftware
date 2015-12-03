@@ -44,5 +44,4 @@ public class LugarServiceImpl extends BaseServiceImpl<Lugar, Integer>
         
     }
     
-    
 }
