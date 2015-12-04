@@ -55,6 +55,13 @@ public class BusServiceImpl extends BaseServiceImpl<Bus, Integer>
         }
     }
     
+    @Override
+    public void actualizarBus(BusDTO busDTO) throws BusinessException {
+        Bus bus = busRepository.get(busDTO.getId());
+        busDTO.passValues(bus);
+        busRepository.update(bus);
+    }
+    
     private boolean esGuardarValido(BusDTO busDTO) throws BusinessException {
         
         if (buscarPorPlaca(busDTO.getPlaca()) != null) {

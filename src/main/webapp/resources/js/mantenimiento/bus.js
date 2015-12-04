@@ -1,5 +1,28 @@
 $(document).ready(function(){
     
+    $(".deleted").click(function(){
+        var r = confirm("¿Esta seguro de borrar el registro?");
+        if (r){
+            var id = $(this).attr("regId");
+            $.post(path + "borrar.json", {id: id}, function(data) {
+                if (data.success){
+                    window.location.reload();
+                } else {
+                    alert("Error al borrar el lugar");
+                }
+            });
+        }
+    });
+    
+    $(".edited").click(function(){
+        var id = $(this).attr("regId");
+        $.get(path + "obtener/" + id + ".json", null, function (data) {
+            if (data) {
+               fillForm(data); 
+            }
+        });
+    });
+    
     $("#form-bus").submit(function(e){
         e.preventDefault();
         var id = $("#id").val();
@@ -8,6 +31,10 @@ $(document).ready(function(){
         } else {
             persistirBus("guardar");
         }
+    });
+    
+    $("#form-bus").on('reset', function(){
+        $("#placa").prop("readOnly", false);
     });
     
     $("#searchModelobus").click(function(e){
@@ -53,6 +80,18 @@ $(document).ready(function(){
     });
     
 });
+
+function fillForm(data) {
+    $("#id").val(data.id);
+    $("#placa").val(data.placa);
+    $("#anio").val(data.anio);
+    $("#estado").val(data.estado);
+    $("#modelobusId").val(data.modelobus);
+    $("#modelobusNombre").val(data.modelobusNombre);
+    $("#agenciaId").val(data.agencia);
+    $("#agenciaNombre").val(data.agenciaNombre);
+    $("#placa").prop("readOnly", true);
+}
 
 function bModeloBusCallback(id, nombre) {
     $("#modelobusId").val(id);

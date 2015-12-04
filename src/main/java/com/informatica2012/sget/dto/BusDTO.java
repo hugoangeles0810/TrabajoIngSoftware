@@ -114,4 +114,12 @@ public class BusDTO implements Serializable {
         return bus;
     }
     
+    public void passValues(Bus bus) {
+        bus.setAno(Integer.parseInt(anio));
+        bus.setPlaca(placa);
+        bus.setEstado(estado.charAt(0));
+        bus.setModeloBus(new ModeloBus(modelobus));
+        bus.setAgencia(new Agencia(agencia));
+    }
+    
 }

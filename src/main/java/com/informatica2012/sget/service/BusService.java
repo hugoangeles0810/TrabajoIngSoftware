@@ -18,6 +18,7 @@ public interface BusService extends BaseService<Bus, Integer> {
     
     public Bus buscarPorPlaca(String placa);
     public void guardarBus(BusDTO busDTO) throws BusinessException;
+    public void actualizarBus(BusDTO busDTO) throws BusinessException;
     public Paginacion getPaginationList(Integer page, Integer size, String search);
     
 }

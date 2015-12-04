@@ -6,12 +6,17 @@
 package com.informatica2012.sget.controller;
 
 import com.informatica2012.sget.dto.BusDTO;
+import com.informatica2012.sget.dto.LugarDTO;
+import com.informatica2012.sget.dto.ModeloBusDTO;
+import com.informatica2012.sget.entity.Bus;
 import com.informatica2012.sget.service.BusService;
 import com.informatica2012.sget.util.Helper;
 import com.informatica2012.sget.util.Paginacion;
+import java.util.HashMap;
 import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -44,6 +49,12 @@ public class BusController {
         return mv;
     }
     
+    @RequestMapping(value = "/obtener/{id}.json", method = RequestMethod.GET)
+    @ResponseBody
+    public BusDTO obtener(@PathVariable("id") Integer id) {
+        return new BusDTO(busService.get(id));
+    }
+    
     @RequestMapping(value = "/guardar.json", method = RequestMethod.POST)
     @ResponseBody
     public Map<String, Object> guardar(@RequestBody BusDTO busDTO){
@@ -54,6 +65,40 @@ public class BusController {
             e.printStackTrace();
             return Helper.responseMapError(e.getMessage());
         }
+    }
+    
+    @RequestMapping(value = "/actualizar.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> actualizar(@RequestBody BusDTO busDTO){
+        
+        try {
+            
+            busService.actualizarBus(busDTO);
+            
+            return Helper.responseMapSuccess("Bus actualizado.");
+        } catch (Exception e) {
+            e.printStackTrace();
+            return Helper.responseMapError("Error al actualizar el bus");
+        }
+    }
+    
+    @RequestMapping(value = "/borrar.json", method = RequestMethod.POST)
+    @ResponseBody
+    public Map<String, Object> borrar(@RequestParam("id") Integer id){
+        Map<String, Object> map = new HashMap();
+        
+        try {
+            Bus b = busService.get(id);
+            if (b != null) {
+                busService.delete(b);
+            }
+            map.put("success", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            map.put("success", false);
+        }
+        
+        return map;
     }
     
 }
