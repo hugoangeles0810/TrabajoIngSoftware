@@ -45,6 +45,7 @@
                                 <li><a href="${cp}/mantenimiento/servicios/index.html">Servicios</a></li>
                                 <li><a href="${cp}/mantenimiento/usuario/index.html">Usuario</a></li>
                                 <li><a href="${cp}/mantenimiento/modelobus/index.html">Modelo de Bus</a></li>
+                                <li><a href="${cp}/mantenimiento/bus/index.html">Bus</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -74,13 +75,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Reportes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="${cp}/reportes/reportedebuses.html" target="_blank">Buses</a></li>
                             </ul>
                         </li>
                     </ul>

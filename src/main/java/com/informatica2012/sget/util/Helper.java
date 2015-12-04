@@ -43,14 +43,14 @@ public class Helper {
     }
     
     public static Map<String, Object> responseMapSuccess(String msg) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap();
         map.put("status", "success");
         map.put("msg", msg);
         return map;
     }
     
     public static Map<String, Object> responseMapError(String msg) {
-        Map<String, Object> map = new HashMap<>();
+        Map<String, Object> map = new HashMap();
         map.put("status", "error");
         map.put("msg", msg);
         return map;

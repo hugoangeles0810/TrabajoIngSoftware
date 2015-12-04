@@ -95,4 +95,16 @@ public class AgenciaController {
         return map;
     }
     
+    @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
+    public ModelAndView buscadorAgencias(
+                    @RequestParam(value = "page", defaultValue = "1") Integer page,
+                    @RequestParam(value = "size", defaultValue = "10") Integer size,
+                    @RequestParam(value = "search", defaultValue = "") String search ) {
+        
+        ModelAndView mv = new ModelAndView(PREFIX + "tableAgencias");
+        Paginacion paginacion = agenciaService.getPaginationList(page, size, search);
+        mv.addObject("paginacion", paginacion);
+        return mv;
+    }
+    
 }

@@ -1,0 +1,20 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package com.informatica2012.sget.service;
+
+import com.informatica2012.sget.report.ReporteFormato;
+import java.util.Map;
+
+/**
+ *
+ * @author Hugo
+ */
+public interface ReporteService {
+    
+    public byte[] generarReporte(String reportName, ReporteFormato formatType,Map<String, Object> parameters);
+    public byte[] generarReportePDF(String reportName,Map<String, Object> parameters);
+    
+}
