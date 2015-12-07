@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -57,7 +56,7 @@ public class Lugar implements Serializable {
     @Size(min = 1, max = 2147483647)
     @Column(name = "distrito")
     private String distrito;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugar", fetch = FetchType.LAZY)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "lugar")
     private List<EstacionTrabajo> estacionTrabajoList;
 
     public Lugar() {

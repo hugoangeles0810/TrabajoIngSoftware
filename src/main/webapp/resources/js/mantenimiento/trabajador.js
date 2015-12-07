@@ -1,6 +1,7 @@
 $(document).ready(function(){
-    
-    $(".datepicker").datepicker();
+    $(".datepicker").datepicker({
+        format: 'dd/mm/yyyy'
+    });
     
     $(".deleted").click(function(){
         var r = confirm("¿Esta seguro de borrar el registro?");

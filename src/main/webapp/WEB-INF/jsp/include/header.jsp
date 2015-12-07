@@ -14,6 +14,7 @@
         <title>.:SGET:.</title>
         <link rel="stylesheet" href="${cp}/resources/css/bootstrap.min.css">
         <link rel="stylesheet" href="${cp}/resources/css/bootstrap-datepicker3.min.css">
+        <link rel="stylesheet" href="${cp}/resources/css/bootstrap-timepicker.min.css">
         <link rel="stylesheet" href="${cp}/resources/css/main.css">
     </head>
     <body>
@@ -51,13 +52,7 @@
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Procesos <span class="caret"></span></a>
                             <ul class="dropdown-menu">
-                                <li><a href="#">Action</a></li>
-                                <li><a href="#">Another action</a></li>
-                                <li><a href="#">Something else here</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">Separated link</a></li>
-                                <li role="separator" class="divider"></li>
-                                <li><a href="#">One more separated link</a></li>
+                                <li><a href="${cp}/procesos/programarviaje/index.html">Programar viaje</a></li>
                             </ul>
                         </li>
                         <li class="dropdown">
@@ -76,6 +71,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"> Reportes <span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="${cp}/reportes/reportedebuses.html" target="_blank">Buses</a></li>
+                                <li><a href="${cp}/reportes/formreporteviajesprogramados.html" target="_blank">Viajes programados</a></li>
                             </ul>
                         </li>
                     </ul>

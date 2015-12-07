@@ -6,8 +6,6 @@
 package com.informatica2012.sget.controller;
 
 import com.informatica2012.sget.dto.BusDTO;
-import com.informatica2012.sget.dto.LugarDTO;
-import com.informatica2012.sget.dto.ModeloBusDTO;
 import com.informatica2012.sget.entity.Bus;
 import com.informatica2012.sget.service.BusService;
 import com.informatica2012.sget.util.Helper;
@@ -99,6 +97,18 @@ public class BusController {
         }
         
         return map;
+    }
+    
+    @RequestMapping(value = "/buscador.html", method = RequestMethod.GET)
+    public ModelAndView buscadorLugar(
+                    @RequestParam(value = "page", defaultValue = "1") Integer page,
+                    @RequestParam(value = "size", defaultValue = "10") Integer size,
+                    @RequestParam(value = "search", defaultValue = "") String search ) {
+        
+        ModelAndView mv = new ModelAndView(PREFIX + "tableBuses");
+        Paginacion paginacion = busService.getPaginationList(page, size, search);
+        mv.addObject("paginacion", paginacion);
+        return mv;
     }
     
 }

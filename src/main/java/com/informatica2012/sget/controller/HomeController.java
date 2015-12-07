@@ -7,6 +7,8 @@ package com.informatica2012.sget.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 /**
  *
@@ -21,8 +23,14 @@ public class HomeController {
     }
     
     @RequestMapping("/login.html")
-    public String login(){
-        return "login";
+    public ModelAndView login(@RequestParam(value = "error", required = false) String error){
+        ModelAndView mv = new ModelAndView("login");
+        
+        if (error != null) {
+            mv.addObject("error", "Credenciales incorrectos");
+        }
+        
+        return mv;
     }
     
 }

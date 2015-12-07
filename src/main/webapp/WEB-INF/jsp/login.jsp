@@ -34,6 +34,15 @@
                 </div>
             </form>
         </div>
+        <c:if test="${not empty error}">
+            <div class="row">
+                <div class="col-md-offset-4 col-md-4">
+                    <div class="alert alert-danger text-center">
+                        ${error}
+                    </div>
+                </div>
+            </div>
+        </c:if>
         
         <script src="${cp}/resources/js/jquery.min.js"></script>
         <script src="${cp}/resources/js/bootstrap.min.js"></script>

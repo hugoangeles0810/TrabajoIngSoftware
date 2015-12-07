@@ -8,18 +8,16 @@ package com.informatica2012.sget.entity;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.List;
 import javax.persistence.Basic;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -42,13 +40,6 @@ public class Viaje implements Serializable {
     private Integer id;
     @Basic(optional = false)
     @NotNull
-    @Column(name = "origen")
-    private int origen;
-    @Basic(optional = false)
-    @Column(name = "destino")
-    private int destino;
-    @Basic(optional = false)
-    @NotNull
     @Column(name = "partida")
     @Temporal(TemporalType.TIMESTAMP)
     private Date partida;
@@ -57,14 +48,15 @@ public class Viaje implements Serializable {
     @NotNull
     @Column(name = "precio")
     private BigDecimal precio;
-    @Basic(optional = false)
-    @NotNull
-    @Column(name = "busid")
-    private int busid;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viaje", fetch = FetchType.LAZY)
-    private List<Boleto> boletoList;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "viaje", fetch = FetchType.LAZY)
-    private List<PersonalViaje> personalViajeList;
+    @JoinColumn(name = "busid", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Bus bus;
+    @JoinColumn(name = "destino", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Agencia destino;
+    @JoinColumn(name = "origen", referencedColumnName = "id")
+    @ManyToOne(optional = false)
+    private Agencia origen;
 
     public Viaje() {
     }
@@ -73,13 +65,10 @@ public class Viaje implements Serializable {
         this.id = id;
     }
 
-    public Viaje(Integer id, int origen, int destino, Date partida, BigDecimal precio, int busid) {
+    public Viaje(Integer id, Date partida, BigDecimal precio) {
         this.id = id;
-        this.origen = origen;
-        this.destino = destino;
         this.partida = partida;
         this.precio = precio;
-        this.busid = busid;
     }
 
     public Integer getId() {
@@ -88,22 +77,6 @@ public class Viaje implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public int getOrigen() {
-        return origen;
-    }
-
-    public void setOrigen(int origen) {
-        this.origen = origen;
-    }
-
-    public int getDestino() {
-        return destino;
-    }
-
-    public void setDestino(int destino) {
-        this.destino = destino;
     }
 
     public Date getPartida() {
@@ -122,28 +95,28 @@ public class Viaje implements Serializable {
         this.precio = precio;
     }
 
-    public int getBusid() {
-        return busid;
+    public Bus getBus() {
+        return bus;
     }
 
-    public void setBusid(int busid) {
-        this.busid = busid;
+    public void setBus(Bus bus) {
+        this.bus = bus;
     }
 
-    public List<Boleto> getBoletoList() {
-        return boletoList;
+    public Agencia getDestino() {
+        return destino;
     }
 
-    public void setBoletoList(List<Boleto> boletoList) {
-        this.boletoList = boletoList;
+    public void setDestino(Agencia destino) {
+        this.destino = destino;
     }
 
-    public List<PersonalViaje> getPersonalViajeList() {
-        return personalViajeList;
+    public Agencia getOrigen() {
+        return origen;
     }
 
-    public void setPersonalViajeList(List<PersonalViaje> personalViajeList) {
-        this.personalViajeList = personalViajeList;
+    public void setOrigen(Agencia origen) {
+        this.origen = origen;
     }
 
     @Override

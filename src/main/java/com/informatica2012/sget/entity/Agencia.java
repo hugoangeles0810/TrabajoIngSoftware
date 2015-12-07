@@ -11,7 +11,6 @@ import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -32,6 +31,8 @@ import javax.validation.constraints.NotNull;
 @NamedQueries({
     @NamedQuery(name = "Agencia.findAll", query = "SELECT a FROM Agencia a")})
 public class Agencia implements Serializable {
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencia")
+    private List<Bus> busList;
     private static final long serialVersionUID = 1L;
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -46,11 +47,13 @@ public class Agencia implements Serializable {
     @NotNull
     @Column(name = "capacidadbus")
     private int capacidadbus;
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "agencia", fetch = FetchType.LAZY)
-    private List<Bus> busList;
     @JoinColumn(name = "estacionid", referencedColumnName = "id")
     @ManyToOne(optional = false)
     private EstacionTrabajo estacionTrabajo;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "destino")
+    private List<Viaje> viajeDestinoList;
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "origen")
+    private List<Viaje> viajeOrigenList;
 
     public Agencia() {
     }
@@ -89,20 +92,28 @@ public class Agencia implements Serializable {
         this.capacidadbus = capacidadbus;
     }
 
-    public List<Bus> getBusList() {
-        return busList;
-    }
-
-    public void setBusList(List<Bus> busList) {
-        this.busList = busList;
-    }
-
     public EstacionTrabajo getEstacionTrabajo() {
         return estacionTrabajo;
     }
 
     public void setEstacionTrabajo(EstacionTrabajo estacionTrabajo) {
         this.estacionTrabajo = estacionTrabajo;
+    }
+
+    public List<Viaje> getViajeDestinoList() {
+        return viajeDestinoList;
+    }
+
+    public void setViajeDestinoList(List<Viaje> viajeDestinoList) {
+        this.viajeDestinoList = viajeDestinoList;
+    }
+
+    public List<Viaje> getViajeOrigenList() {
+        return viajeOrigenList;
+    }
+
+    public void setViajeOrigenList(List<Viaje> viajeOrigenList) {
+        this.viajeOrigenList = viajeOrigenList;
     }
 
     @Override
@@ -128,6 +139,14 @@ public class Agencia implements Serializable {
     @Override
     public String toString() {
         return "com.informatica2012.sget.entity.Agencia[ id=" + id + " ]";
+    }
+
+    public List<Bus> getBusList() {
+        return busList;
+    }
+
+    public void setBusList(List<Bus> busList) {
+        this.busList = busList;
     }
     
 }

@@ -44,10 +44,6 @@ public class ReporteRepositoryImpl implements ReporteRepository{
                 parameters = new HashMap();
             }
             
-            System.out.println(REPORTS_DIR + reportName + JASPER_SUFFIX);
-            URL url = this.getClass().getResource(REPORTS_DIR + reportName + JASPER_SUFFIX);
-            System.out.println("Url:");
-            System.out.println(url);
             jasperReport = (JasperReport) JRLoader.loadObject(this.getClass().getResource(REPORTS_DIR + reportName + JASPER_SUFFIX));
             parameters.put(SUBREPORT_DIR, getClass().getResource(REPORTS_DIR).toString());
             Connection connection = dataSource.getConnection();

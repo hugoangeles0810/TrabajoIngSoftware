@@ -11,8 +11,6 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -30,11 +28,32 @@ public class Helper {
         return df.format(date);
     }
     
+    public static String formatHour(Date date){
+        df.applyPattern("HH:mm");
+        String result = df.format(date);
+        df.applyPattern(Constantes.DATE_FORMAT);
+        return result;
+    }
+    
     public static Date parseDate(String stringDate) {
         Date date;
         
         try {
             date = df.parse(stringDate);
+        } catch (ParseException ex) {
+            date = new Date();
+        }
+        
+        return date;
+    }
+    
+    public static Date parseDateAndHour(String stringDate) {
+        Date date;
+        
+        try {
+            df.applyPattern(Constantes.DATE_FORMAT + "HH:mm");
+            date = df.parse(stringDate);
+            df.applyPattern(Constantes.DATE_FORMAT);
         } catch (ParseException ex) {
             date = new Date();
         }

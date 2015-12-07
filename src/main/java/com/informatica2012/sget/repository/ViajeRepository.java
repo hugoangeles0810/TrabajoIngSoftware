@@ -3,14 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.informatica2012.sget.report;
+package com.informatica2012.sget.repository;
+
+import com.informatica2012.sget.entity.Viaje;
 
 /**
  *
  * @author Hugo
  */
-public class Reportes {
- 
-    public static final String REPORTE_BUSES = "reportBuses";
-    public static final String REPORTE_VIAJES_PROGRAMADOS = "reportViajes";
+public interface ViajeRepository extends BaseRepository<Viaje, Integer> {
+    
 }
